@@ -1,0 +1,18 @@
+/*
+* Taxonomy Data
+*/
+INSERT INTO Taxonomy (Description) VALUES
+('Type conversion');
+
+
+/*
+* Conflit Data
+*/
+INSERT INTO Conflict (ApiName, ApiVersion, Path, Value) VALUES
+('CoAP', '1.0.0', '/', 'integer');
+
+/*
+* Resolution Data
+*/
+INSERT INTO Resolution (ConflictID, TaxonomyID, NodeChain) VALUES
+(1,1, '[{"path":"/", "type":"string", "cast":"integer"}]');
