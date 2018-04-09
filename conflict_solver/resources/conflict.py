@@ -18,7 +18,8 @@ class Conflict(Resource):
     def post(self):
         conflictJSON = request.get_json(force=True)
         conflictObj = conflict.ConflictModel.fromJSON(conflictJSON)
+        print(conflictObj)
 
-        db = DBManager().getDatabase()
-        query = db.execute(conflict.insert(conflictObj))
+        #db = DBManager().getDatabase()
+        #query = db.execute(conflict.insert(conflictObj))
         return 

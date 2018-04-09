@@ -3,29 +3,44 @@ class ConflictModel():
 
     def __init__(self):
         self.id = 0
-        self.apiName = ''
-        self.apiVersion = ''
+        self.api_name = ''
+        self.old_api_version = ''
+        self.new_api_version = ''
         self.path = ''
-        self.value = ''
+        self.old_value = ''
+        self.new_value = ''
 
 
     def toJSON(self):
         return {
                     'id': self.id,
-                    'api_name': self.apiName,
-                    'api_version': self.apiVersion,
+                    'api_name': self.api_name,
+                    'old_api_version': self.old_api_version,
+                    'new_api_version': self.new_api_version,
                     'path': self.path,
-                    'value': self.value,
+                    'old_value': self.old_value,
+                    'new_value': self.new_value,
                 }
 
 
     @classmethod
     def fromJSON(cls, json):
+        print(type(json))
+        if type(json) is list:
+            return [cls.fromDict(dic) for dic in json]
+
+        return cls.fromDict(json)
+
+
+    @classmethod
+    def fromDict(cls, dic):
         cls = ConflictModel()
-        cls.apiName = json['api_name']
-        cls.apiVersion = json['api_version']
-        cls.path = json['path']
-        cls.value = json['value']
+        cls.api_name = dic['api_name']
+        cls.old_api_version = dic['old_api_version']
+        cls.new_api_version = dic['new_api_version']
+        cls.path = dic['path']
+        cls.old_value = dic['old_value']
+        cls.new_value = dic['new_value']
         return cls
 
 
@@ -38,6 +53,7 @@ class ConflictModel():
         cls.path = cur[3]
         cls.value = cur[4]
         return cls
+
 
 def selectByID(id):
     return 'SELECT ID, ApiName, ApiVersion, Path, Value FROM Conflict' + \
