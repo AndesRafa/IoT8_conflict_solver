@@ -8,8 +8,15 @@ INSERT INTO Taxonomy (Description) VALUES
 /*
 * Conflit Data
 */
-INSERT INTO Conflict (ApiName, ApiVersion, Path, Value) VALUES
-('CoAP', '1.0.0', '/', 'integer');
+INSERT INTO Conflict (
+    ApiName,
+    OldApiVersion,
+    NewApiVersion,
+    Path,
+    OldValue,
+    NewValue
+) VALUES
+('CoAP', '1.0.0', '2.0.0', '/', 'integer', 'string');
 
 /*
 * Resolution Data

@@ -1,11 +1,15 @@
+DROP TABLE IF EXISTS Conflict;
 CREATE TABLE Conflict (
     ID INTEGER PRIMARY KEY,
     ApiName VARCHAR(500),
-    ApiVersion VARCHAR(50),
+    OldApiVersion VARCHAR(50),
+    NewApiVersion VARCHAR(50),
     Path VARCHAR(500),
-    Value VARCHAR(500)
+    OldValue VARCHAR(500),
+    NewValue VARCHAR(500)
 );
 
+DROP TABLE IF EXISTS Taxonomy;
 CREATE TABLE Taxonomy (
     ID INTEGER PRIMARY KEY,
     Name VARCHAR(100),
@@ -13,6 +17,7 @@ CREATE TABLE Taxonomy (
     Solution VARCHAR(500)
 );
 
+DROP TABLE IF EXISTS Resolution;
 CREATE TABLE Resolution (
     ID INTEGER PRIMARY KEY,
     ConflictID INTEGER,

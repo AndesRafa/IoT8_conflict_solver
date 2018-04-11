@@ -48,26 +48,74 @@ class ConflictModel():
     def fromCursorItem(cls, cur):
         cls = ConflictModel()
         cls.id = cur[0]
-        cls.apiName = cur[1]
-        cls.apiVersion = cur[2]
-        cls.path = cur[3]
-        cls.value = cur[4]
+        cls.api_name = cur[1]
+        cls.old_api_version = cur[2]
+        cls.new_api_version = cur[3]
+        cls.path = cur[4]
+        cls.old_value = cur[5]
+        cls.new_value = cur[6]
         return cls
 
 
 def selectByID(id):
-    return 'SELECT ID, ApiName, ApiVersion, Path, Value FROM Conflict' + \
-            'WHERE ID = {}'.format(id);
+    return 'SELECT ID, ApiName, OldApiVersion, ' +\
+            'NewApiVersion, Path, OldValue, NewValue ' +\
+            'FROM Conflict' +\
+            'WHERE ID = {};'.format(id)
 
 
 def selectAll():
-    return 'SELECT ID, ApiName, ApiVersion, Path, Value FROM Conflict;'
+    return 'SELECT ID, ApiName, OldApiVersion, ' +\
+            'NewApiVersion, Path, OldValue, NewValue ' +\
+            'FROM Conflict;'
 
 
 def insert(item):
-    return 'INSERT INTO Conflict(ApiName, ApiVersion, Path, Value)' + \
-            ' VALUES (\'{}\',\'{}\',\'{}\',\'{}\');' \
-            .format(item.apiName, item.apiVersion, item.path, item.value)
+    if type(item) is list:
+        return insertBulk(item)
+
+    return insertSingle
+
+
+def insertSingle(item):
+    return 'INSERT INTO Conflict( '+\
+            'ApiName, OldApiVersion, NewApiVersion, ' +\
+            'Path, OldValue, NewValue)' + \
+            ' VALUES (\
+"{}","{}","{}",\
+"{}","{}","{}");' \
+            .format(
+                    item.api_name, 
+                    item.old_api_version, 
+                    item.new_api_version,
+                    item.path.encode("utf-8"),
+                    item.old_value,
+                    item.new_value)
+
+
+def insertBulk(items):
+    if not len(items) > 0:
+        raise Exception('Nothing to bulk insert')
+
+    query = 'INSERT INTO Conflict( \
+ApiName, OldApiVersion, NewApiVersion, \
+Path, OldValue, NewValue ) \
+VALUES '
+
+    for item in items:
+        query += \
+'("{}","{}","{}",\
+"{}","{}","{}"),' \
+                .format(
+                    item.api_name,
+                    item.old_api_version,
+                    item.new_api_version,
+                    str(item.path).encode("utf-8"),
+                    item.old_value,
+                    item.new_value)
+
+    query = query[:len(query) - 1] + ';'
+    return query
 
 
 def conflictsFromCursor(items):
@@ -76,3 +124,12 @@ def conflictsFromCursor(items):
         results.append(ConflictModel.fromCursorItem(item))
 
     return results
+
+
+def adjustValueFormat(value):
+    value = str(value).replace('\'', '"')
+    value = value.replace('u"', '')
+    value = value.replace('True', 'true')
+    value = value.replace('False', 'false')
+    value = value.replace('"', '')
+
