@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from conflict_solver.models.conflict \
+from conflict_solver.models.conflict_model \
         import insert, insertSingle, insertBulk
-from conflict_solver.models.conflict \
+from conflict_solver.models.conflict_model \
         import ConflictModel
 
 class ConflictModelTestCase(TestCase):

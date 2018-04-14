@@ -1,0 +1,14 @@
+{%- macro formatSQLValue(value) %}
+    {%- if value is number -%} {{value}}
+    {%- else -%} '{{value}}' {%- endif -%}
+{%- endmacro -%}
+
+{%- block selectBody %}
+SELECT
+    {%- for col in columns %}
+        {{col}}{%- if not loop.last %},{% endif -%}
+    {%- endfor %}
+FROM {{table}}
+{%- block whereClause %}{% endblock -%}
+;
+{% endblock -%}

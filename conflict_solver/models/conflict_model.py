@@ -38,7 +38,7 @@ class ConflictModel():
         cls.api_name = dic['api_name']
         cls.old_api_version = dic['old_api_version']
         cls.new_api_version = dic['new_api_version']
-        cls.path = dic['path']
+        cls.path = [x.encode("utf-8") for x in dic['path']]
         cls.old_value = dic['old_value']
         cls.new_value = dic['new_value']
         return cls
@@ -74,7 +74,7 @@ def insert(item):
     if type(item) is list:
         return insertBulk(item)
 
-    return insertSingle
+    return insertSingle(item)
 
 
 def insertSingle(item):
@@ -88,7 +88,7 @@ def insertSingle(item):
                     item.api_name, 
                     item.old_api_version, 
                     item.new_api_version,
-                    item.path.encode("utf-8"),
+                    item.path,
                     item.old_value,
                     item.new_value)
 
@@ -110,7 +110,7 @@ VALUES '
                     item.api_name,
                     item.old_api_version,
                     item.new_api_version,
-                    str(item.path).encode("utf-8"),
+                    item.path,
                     item.old_value,
                     item.new_value)
 
@@ -124,12 +124,4 @@ def conflictsFromCursor(items):
         results.append(ConflictModel.fromCursorItem(item))
 
     return results
-
-
-def adjustValueFormat(value):
-    value = str(value).replace('\'', '"')
-    value = value.replace('u"', '')
-    value = value.replace('True', 'true')
-    value = value.replace('False', 'false')
-    value = value.replace('"', '')
 

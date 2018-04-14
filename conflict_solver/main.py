@@ -1,8 +1,8 @@
 import os
 
 from server import Server
-from resources.conflict import Conflict
-from services.database import DBManager
+from resources.conflict_resource import ConflictResource
+from services.database_service import DBManager
 
 def main():
     print('*************************************')
@@ -20,7 +20,7 @@ def main():
     server = Server(port=port)
 
     print('Loading resources')
-    server.addResources([(Conflict, '/conflict')])
+    server.addResources([(ConflictResource, '/conflict')])
 
     print('Starting server')
     server.serve()

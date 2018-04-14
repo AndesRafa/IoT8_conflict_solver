@@ -1,22 +1,13 @@
+from base_model import BaseModel
 
-class ResolutionModel():
+class ResolutionModel(BaseModel):
 
     def __init__(self):
         self.id = 0
-        self.apiName = ''
-        self.apiVersion = ''
+        self.conflictID = 0
+        self.taxonomyID = 0
+        self.hostName = ''
         self.path = ''
-        self.value = ''
-
-
-    def toJSON(self):
-        return {
-                    'id': self.id,
-                    'api_name': self.apiName,
-                    'api_version': self.apiVersion,
-                    'path': self.path,
-                    'value': self.value,
-                }
 
 
     @classmethod
@@ -38,6 +29,7 @@ class ResolutionModel():
         cls.path = cur[3]
         cls.value = cur[4]
         return cls
+
 
 def selectByID(id):
     return 'SELECT ID, ApiName, ApiVersion, Path, Value FROM Conflict' + \

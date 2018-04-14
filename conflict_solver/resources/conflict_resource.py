@@ -2,10 +2,10 @@ from flask import request
 from flask_jsonpify import jsonify
 from flask_restful import Resource
 
-from models import conflict
-from services.database import DBManager, Database
+from models import conflict_model as conflict
+from services.database_service import DBManager, Database
 
-class Conflict(Resource):
+class ConflictResource(Resource):
         
 
     def get(self):
@@ -17,8 +17,7 @@ class Conflict(Resource):
 
     def post(self):
         conflictJSON = request.get_json(force=True)
-        conflictObj = conflict.ConflictModel.fromJSON(conflictJSON)
-
+        conflictObj = conflict.ConflictModel.fromJSON(conflictJSON) 
         db = DBManager().getDatabase()
         query = db.execute(conflict.insert(conflictObj))
         return 
