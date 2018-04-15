@@ -18,6 +18,29 @@ INSERT INTO Conflict (
 ) VALUES
 ('CoAP', '1.0.0', '2.0.0', '/', 'integer', 'string');
 
+
+/*
+* Adaptation Data
+*/
+INSERT INTO Adaptation (
+    ApiName,
+    ApiVersion,
+    ApiResource,
+    ApiVerb,
+    AdaptationNode,
+    AdaptationVerb,
+    AdaptationOperation,
+    AdaptationDataLocation,
+    AdaptationDataValue,
+    MessageFlow
+) VALUES
+('localhost:6900', '0.0.1', 'fire_report', 'GET',
+ 'caster', 'POST', 'INTEGER', 'FIELD', 'measureDate', 'RESPONSE'),
+('shas.io', '0.0.1', 'fire_report', 'GET',
+ 'caster', 'POST', 'INTEGER', 'FIELD', 'measureDate', 'RESPONSE'),
+('shas.io', '0.0.1', 'fire_report', 'GET',
+ 'caster', 'POST', 'INTEGER', 'FIELD', 'eta', 'RESPONSE');
+
 /*
 * Resolution Data
 */

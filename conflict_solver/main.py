@@ -1,8 +1,10 @@
 import os
 
-from server import Server
-from resources.conflict_resource import ConflictResource
-from services.database_service import DBManager
+from kaz_restful.server import Server
+from kaz_sql.services.database import DBManager
+
+from resources.conflict import Conflict
+from resources.adaptation import Adaptation, AdaptationList
 
 def main():
     print('*************************************')
@@ -20,7 +22,12 @@ def main():
     server = Server(port=port)
 
     print('Loading resources')
-    server.addResources([(ConflictResource, '/conflict')])
+    server.addResources([
+            (Conflict, '/conflict'),
+            (AdaptationList, '/adaptations'),
+            (Adaptation, '/adaptation'),
+            #'/adaptation/apiname/<string:apiname>/resource/<string:apiresource>'),
+        ])
 
     print('Starting server')
     server.serve()

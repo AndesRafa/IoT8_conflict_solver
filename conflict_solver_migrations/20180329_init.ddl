@@ -9,6 +9,21 @@ CREATE TABLE Conflict (
     NewValue VARCHAR(500)
 );
 
+DROP TABLE IF EXISTS Adaptation;
+CREATE TABLE Adaptation (
+    ID INTEGER PRIMARY KEY,
+    ApiName VARCHAR(500),
+    ApiVersion VARCHAR(50),
+    ApiResource VARCHAR(100),
+    ApiVerb VARCHAR(10),
+    AdaptationNode VARCHAR(100),
+    AdaptationVerb VARCHAR(10),
+    AdaptationOperation VARCHAR(100),
+    AdaptationDataLocation VARCHAR(100),
+    AdaptationDataValue VARCHAR(500),
+    MessageFlow VARCHAR(50) 
+);
+
 DROP TABLE IF EXISTS Taxonomy;
 CREATE TABLE Taxonomy (
     ID INTEGER PRIMARY KEY,

@@ -1,6 +1,6 @@
 import os
+
 from conflict_solver.models import conflict_model as conflict
-from conflict_solver.services.database_service import DBManager, Database
 
 
 def solveConflict():

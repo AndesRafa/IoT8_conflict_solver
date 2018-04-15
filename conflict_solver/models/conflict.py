@@ -1,14 +1,14 @@
 
-class ConflictModel():
+class Conflict():
 
     def __init__(self):
-        self.id = 0
-        self.api_name = ''
-        self.old_api_version = ''
-        self.new_api_version = ''
-        self.path = ''
-        self.old_value = ''
-        self.new_value = ''
+        self.ID = 0
+        self.ApiName = ''
+        self.OldApiVersion = ''
+        self.NewApiVersion = ''
+        self.Path = ''
+        self.OldValue = ''
+        self.NewValue = ''
 
 
     def toJSON(self):
