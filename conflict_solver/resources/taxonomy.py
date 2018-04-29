@@ -12,7 +12,6 @@ class Taxonomy(Resource):
     def get(self):
         db = DBManager().getDatabase()
         taxonomies = db.selectAll(TaxonomyRep) 
-        print(json.toJSON(taxonomies))
         resp = make_response(json.toJSON(taxonomies))
         resp.headers['content-type'] = 'application/json'
         return resp

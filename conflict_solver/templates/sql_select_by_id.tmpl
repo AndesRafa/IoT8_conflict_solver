@@ -1,8 +1,0 @@
-{%- extends "sql_select_all.tmpl" -%}
-{%- block whereClause %}
-WHERE 
-    {%- for name, value in selectors %}
-        {{ name }} = {{ formatSQLValue(value) }}{%- if not loop.last %}AND{% endif -%}
-        {#{{ name }} = {{ value }}#}
-    {%- endfor %}
-{%- endblock %}
