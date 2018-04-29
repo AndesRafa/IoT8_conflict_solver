@@ -1,0 +1,56 @@
+/**
+* ApiElement Data
+*/
+INSERT INTO ApiElement (
+    ApiElementID,
+    ApiElementName,
+    ApiElementDescription
+) VALUES
+(1, 'property-type', 'Type of property in a schema object definition'),
+(2, 'property-name', 'Name of property in a schema object definition');
+
+
+/**
+* DifferentialType Data
+*/
+INSERT INTO DifferentialType (
+    DifferentialTypeID,
+    DifferentialTypeDescription
+) VALUES 
+(1, 'ADD'),
+(2, 'DELETE'),
+(3, 'MODIFY');
+
+
+/**
+* Taxonomy Data
+*/
+INSERT INTO Taxonomy ( 
+    TaxonomyID,
+    Description,
+    DifferentialTypeID,
+    ApiElementID,
+    AdaptationNodeID
+) VALUES 
+(1, 3, 1, 'Modify propert type in schema', 0),
+(2, 1, 0, 'Add new a new property to schema', 0),
+(3, 2, 0, 'Delete a property from schema', 0),
+(4, 3, 0, 'Modify a property in schema', 0);
+
+
+/**
+* AdaptationNode Data
+*/
+INSERT INTO AdaptationNode ( 
+    AdaptationNodeID,
+    TaxonomyID,
+    AdaptationNodeName,
+    AdaptationNodeDescription,
+    AdaptationNodeVerb,
+    AdaptationNodePath,
+    AdaptationNodeRequest,
+    AdaptationNodeResponse
+) VALUES
+(1, 1, 'Caster', 'Casts input value to the specified type', 'POST',
+'{{AdapterChain}}/caster', '{''value'':''<param1>'', ''to-type'':''<param2>''}',
+'{''type'':''<resp1>'', ''value'':''<resp2>''}');

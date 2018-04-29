@@ -3,8 +3,9 @@ import os
 from kaz_restful.server import Server
 from kaz_sql.services.database import DBManager
 
-from resources.conflict import Conflict
-from resources.adaptation import Adaptation, AdaptationList
+from resources.differentials import Differential
+from resources.taxonomy import Taxonomy
+from resources.adaptation_node import AdaptationNode
 
 def main():
     print('*************************************')
@@ -23,10 +24,9 @@ def main():
 
     print('Loading resources')
     server.addResources([
-            (Conflict, '/conflict'),
-            (AdaptationList, '/adaptations'),
-            (Adaptation, '/adaptation'),
-            #'/adaptation/apiname/<string:apiname>/resource/<string:apiresource>'),
+            (Differential, '/differential'),
+            (Taxonomy, '/taxonomy'),
+            (AdaptationNode, '/adaptation'),
         ])
 
     print('Starting server')
