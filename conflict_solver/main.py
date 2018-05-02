@@ -6,6 +6,7 @@ from kaz_sql.services.database import DBManager
 from resources.differentials import Differential
 from resources.taxonomy import Taxonomy
 from resources.adaptation_node import AdaptationNode
+from resources.differential_adaptation import DifferentialAdaptation
 
 def main():
     print('*************************************')
@@ -27,6 +28,7 @@ def main():
             (Differential, '/differential'),
             (Taxonomy, '/taxonomy'),
             (AdaptationNode, '/adaptation'),
+            (DifferentialAdaptation, '/differential_adaptation')
         ])
 
     print('Starting server')
